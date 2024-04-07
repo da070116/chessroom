@@ -1,2 +1,2 @@
-# chessroom
-Educational projrect
+# Shipboard
+Educational project

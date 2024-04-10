@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "shipboard"
+version = "0.1.0"
+description = "Battleship game server"
+authors = ["Alexander Freze <da070116@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include="shipboard"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^8.1.1"
+ruff = "^0.3.5"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

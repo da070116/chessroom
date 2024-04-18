@@ -65,6 +65,8 @@ class GameBoard:
         for s in self.ships:
             s.check_damage(coord)
         row, col = coord.get_tuple()
+        if row > self.size or col > self.size:
+            return
         if self.hidden_cells[row][col] == CellType.SET:
             self.cells[row][col] = CellType.HIT
         else:

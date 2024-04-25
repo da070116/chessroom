@@ -1,5 +1,13 @@
 from shipboard.field.coordinate_manager import Coordinate
 
+SHIP_TYPES = {
+    # "Carrier": 5,
+    # "Battleship": 4,
+    # "Cruiser": 3,
+    "Submarine": 3,
+    "Destroyer": 2,
+}
+
 
 class Ship:
     name: str

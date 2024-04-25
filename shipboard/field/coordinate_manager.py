@@ -1,3 +1,6 @@
+from shipboard.utils.exceptions import ShipCoordinatesCollision
+
+
 class Coordinate:
     name: str
     row: int
@@ -37,4 +40,14 @@ class CoordinateManager:
         name = f"{letter}{col + 1}"
 
         return Coordinate(row, col, name)
+
+    @staticmethod
+    def compare(coord1: Coordinate, coord2: Coordinate) -> int:
+        if coord1.row == coord2.row and coord1.col != coord2.col:
+            return True
+        if coord1.row != coord2.row and coord1.col == coord2.col:
+            return False
+        raise ShipCoordinatesCollision()
+
+
 

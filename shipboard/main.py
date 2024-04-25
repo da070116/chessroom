@@ -4,6 +4,7 @@ import subprocess
 
 from shipboard.field.board import GameBoard
 from shipboard.field.coordinate_manager import CoordinateManager
+from shipboard.utils.exceptions import TerminateInput
 
 FAREWELLS = [
     "More power to you!",
@@ -73,10 +74,15 @@ if __name__ == '__main__':
 
     board = GameBoard()
     cm = CoordinateManager(alphabet=board.alphabet)
+    try:
+        board.add_ships_manually(coordinate_manager=cm)
+    except TerminateInput:
+        print("Game was terminated")
+        exit()
     tries = (board.size ** 2) - (board.size ** 2 // 5)
     while True:
         subprocess.run("clear")
-        board.console_draw(tries)
+        board.draw_gameplay(tries)
 
         if tries == 0:
             shuffle(FAREWELLS)

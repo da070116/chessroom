@@ -2,9 +2,7 @@ import os
 from random import shuffle
 import subprocess
 
-from shipboard.field.board import GameBoard
-from shipboard.field.coordinate_manager import CoordinateManager
-from shipboard.utils.exceptions import TerminateInput
+from shipboard.gameplay.board import Board
 
 FAREWELLS = [
     "More power to you!",
@@ -72,34 +70,36 @@ FAREWELLS = [
 
 if __name__ == '__main__':
 
-    board = GameBoard()
-    cm = CoordinateManager(alphabet=board.alphabet)
-    try:
-        board.add_ships_manually(coordinate_manager=cm)
-    except TerminateInput:
-        print("Game was terminated")
-        exit()
-    tries = (board.size ** 2) - (board.size ** 2 // 5)
-    while True:
-        subprocess.run("clear")
-        board.draw_gameplay(tries)
-
-        if tries == 0:
-            shuffle(FAREWELLS)
-            print(f"This game is over. Out of ammo. {FAREWELLS.pop()}")
-            break
-        a = board.get_current_damage()
-        b = board.get_max_damage()
-        if a == b and a > 0:
-            shuffle(FAREWELLS)
-            print(f"All ships have sunk. {FAREWELLS.pop()}")
-            break
-
-        action = input("Shoot or enter `q` for exit: ")
-        if action == "q":
-            shuffle(FAREWELLS)
-            print(FAREWELLS.pop())
-            break
-
-        board.fire_at(coord=cm.coordinate_from_str(action))
-        tries -= 1
+    board = Board(is_hidden=True)
+    print(board.visualize())
+    # board = GameBoard()
+    # cm = CoordinateManager(alphabet=board.alphabet)
+    # try:
+    #     board.add_ships_manually(coordinate_manager=cm)
+    # except TerminateInput:
+    #     print("Game was terminated")
+    #     exit()
+    # tries = (board.size ** 2) - (board.size ** 2 // 5)
+    # while True:
+    #     subprocess.run("clear")
+    #     board.draw_gameplay(tries)
+    #
+    #     if tries == 0:
+    #         shuffle(FAREWELLS)
+    #         print(f"This game is over. Out of ammo. {FAREWELLS.pop()}")
+    #         break
+    #     a = board.get_current_damage()
+    #     b = board.get_max_damage()
+    #     if a == b and a > 0:
+    #         shuffle(FAREWELLS)
+    #         print(f"All ships have sunk. {FAREWELLS.pop()}")
+    #         break
+    #
+    #     action = input("Shoot or enter `q` for exit: ")
+    #     if action == "q":
+    #         shuffle(FAREWELLS)
+    #         print(FAREWELLS.pop())
+    #         break
+    #
+    #     board.fire_at(coord=cm.coordinate_from_str(action))
+    #     tries -= 1
